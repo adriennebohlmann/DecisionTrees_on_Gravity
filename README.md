@@ -6,7 +6,7 @@ The aim of this excercise: apply decision trees (boosting and ensembles) on a no
 Specifically: predict bilateral trade between countries with GDP of exporting and importing country, their distance and some binary variables, such as common official language. 
 The distribution of the data, theory and numerous empirical studies show that the relation is non-linear, following the law of gravity. 
 
-<img src="https://render.githubusercontent.com/render/math?math=$trade_flow=\frac{GDP_exp*GDP_imp}{GDP_world}*(\frac{trade_costs}{ML_exp*ML_imp})^elast$">
+<img src="https://render.githubusercontent.com/render/math?math=$tradeFlow=\frac{GDP_{exp}*GDP_{imp}}{GDP_{world}}*(\frac{tradeCosts}{ML_{exp}*ML_{imp}})^elast$">
 
 There is loads of literature on this, for a practitioner oriented overview highly recommended: Yotov, Yoto; Piermartini, Roberta; Monteiro, José-Antonio; Larch, Mario (2016): An Advanced Guide to Trade Policy Analysis: The Structural Gravity Model. UNCTAD/WTO.
 
