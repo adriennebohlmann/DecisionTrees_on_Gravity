@@ -19,7 +19,6 @@ import numpy as np
 
 
 from sklearn.model_selection import train_test_split, RandomizedSearchCV, GridSearchCV
-from sklearn.preprocessing import QuantileTransformer #, StandardScaler, Normalizer
 
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, AdaBoostRegressor
