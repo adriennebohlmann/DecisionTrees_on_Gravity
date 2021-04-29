@@ -35,10 +35,23 @@ Spoiler alert: robustness is a problem. I blame this mainly on the lack of expla
 
 # Results
 
-Randomness is in various places - intentionally so! 
+Randomness is in various places - intentionally so!  
 Therefore results will vary from running the code, but overall results from cross-validated results should not vary much.
 
-optimized Random Forest Test-R2: 63%
+Only one tweak:  
+Zero trade is about 25% in the data. In order to smoothe results, statified fold in cross validation ensures that this share is equal in both test and train data.
+
+mean cross validated Test-R2 from 
+* RandomForestRegressor(n_estimators=200, max_depth=52): 63% 
+* RandomForestRegressor(n_estimators=377, max_depth=13); 62%
+* GradientBoostingRegressor(loss = 'huber', max_depth = 8, n_estimators = 200): 69%
+* GradientBoostingRegressor(loss = 'huber', max_depth = 8, n_estimators = 200): 68%
+* AdaBoostRegressor(base_estimator = DecisionTreeRegressor(criterion = 'friedman_mse', max_depth=34)): 69%
+
+To put this in perspective:  
+* Test-R2 are from out-of sample. Training R2 usually overfits with an R2 over 90%.
+* There is no transformation of the data (apart from removed missing observations).
+* The Zero-trade observations are quite numerous (25%), with no obvious explanatory variable explaining the theshold included. Nevertheless, mean predictive power is comparable to explanatory power of traditional regression analysis.
 
 
 
