@@ -4,6 +4,8 @@
 gravity random forest, ensembles
 OOP
 
+@author: adrienne bohlmann
+
 python 3.7.7
 numpy 1.19.2
 scikit-learn 0.24.1
