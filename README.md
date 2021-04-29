@@ -33,4 +33,13 @@ In order to tune and improve results, train-testsplit, grid search, crossvalidat
 
 Spoiler alert: robustness is a problem. I blame this mainly on the lack of explanatory power of the theshold itself.
 
+# Results
+
+Randomness is in various places - intentionally so! 
+Therefore results will vary from running the code, but overall results from cross-validated results should not vary much.
+
+optimized Random Forest Test-R2: 63%
+
+
+
 
