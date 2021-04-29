@@ -31,5 +31,6 @@ The following scikit-learn ensemble methods are applied:
 
 In order to tune and improve results, train-testsplit, grid search, crossvalidation and other scikit-learn methods help a lot too, of course.
 
+Spoiler alert: robustness is a problem. I blame this mainly on the lack of explanatory power of the theshold itself.
 
 
