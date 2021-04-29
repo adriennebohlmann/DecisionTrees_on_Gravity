@@ -4,14 +4,14 @@
 gravity random forest, ensembles
 OOP
 
-@author: adrienne bohlmann
-
 python 3.7.7
 numpy 1.19.2
 scikit-learn 0.24.1
 tensorflow 2.0.0    
 keras 2.3.1
 matplitlib 3.3.2
+
+@author: adrienne bohlmann
 
 """
 import pandas as pd
@@ -146,14 +146,6 @@ class prepare_data:
         plt.hist(self.X_train[:, 0], alpha=0.6, bins=100, color='brown')
         plt.hist(self.X_train[:, 1], alpha=0.6, bins=100, color='orange')
         plt.title('selected unscaled training data')
-        plt.legend(['weighted distance', 'GDP'])
-        plt.show()
-        
-        # scaled data
-        plt.hist(self.X_train_scaled[:, 0], alpha=0.6, bins=100, color='brown')
-        plt.hist(self.X_train_scaled[:, 1], alpha=0.6, bins=100, color='orange')
-        # hist_title = str(self.scaler) + ' training data'
-        plt.title('selected scaled training data')
         plt.legend(['weighted distance', 'GDP'])
         plt.show()
         
@@ -315,15 +307,6 @@ data.tts(rnd = None)
 # single grid search:
 rf_random.fit(data.X_train, data.y_train)
 rf_random.best_params_
-
-# rnd = 42 gives 
-# {'n_estimators': 270, 'max_depth': 76}
-# {'n_estimators': 86, 'max_depth': 28}
-# {'n_estimators': 77, 'max_depth': 52}
-# random tts
-# {'n_estimators': 50, 'max_depth': 52}
-# {'n_estimators': 68, 'max_depth': 52}
-# {'n_estimators': 50, 'max_depth': 52}
 
 
 ##############################################################################
