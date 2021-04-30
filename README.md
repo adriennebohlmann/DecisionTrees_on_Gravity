@@ -48,7 +48,7 @@ mean cross validated Test-R2 from
 * GradientBoostingRegressor(loss = 'huber', max_depth = 8, n_estimators = 200): 69%
 * GradientBoostingRegressor(loss = 'ls', max_depth = 3, n_estimators = 200): 68%
 * GradientBoostingRegressor(subsample = 0.8, max_depth=5, n_estimators = 200): 64%
-* AdaBoostRegressor(base_estimator = DecisionTreeRegressor(criterion = 'friedman_mse', max_depth=34)): 69%
+* AdaBoostRegressor(base_estimator = DecisionTreeRegressor(criterion = 'friedman_mse', max_depth=34)): 59%
 
 Evaluation of results:
 * Test-R2 are from out-of sample. Training-R2 is usually over 90% (indicating overfitting).
