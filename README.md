@@ -8,51 +8,52 @@ The distribution of the data, theory and numerous empirical studies show that th
 
 <img src="https://render.githubusercontent.com/render/math?math=tradeFlow=\frac{GDP_{exp}*GDP_{imp}}{GDP_{world}}*(\frac{tradeCosts}{ML_{exp}*ML_{imp}})^{1-elast}">
 
-There is loads of literature on this, for a practitioner oriented overview highly recommended: Yotov, Yoto; Piermartini, Roberta; Monteiro, José-Antonio; Larch, Mario (2016): An Advanced Guide to Trade Policy Analysis: The Structural Gravity Model. UNCTAD/WTO.
+There is loads of literature on this, for a practitioner oriented overview I highly recommend: Yotov, Yoto; Piermartini, Roberta; Monteiro, José-Antonio; Larch, Mario (2016): An Advanced Guide to Trade Policy Analysis: The Structural Gravity Model. UNCTAD/WTO.
 
 However, there are various problems occuring when applying this equation to data. Above all, the ML-variables cannot be observed. Another point is that trade flow is plagued with Zeros. Intuitively and simplified, they occur as a theshold to be overcome in order to trade at all, because of international trade costs.
 
 There are quite a few solutions to tackle these problems in econometric analysis - see the source cited above!
 
-Here, I offer another perspective and solution on this topic based on decicion trees.
+Here, I offer another possible approach for this topic based on decicion trees.
 
 ## summary, spoiler alert and why decision trees??
 
-Tradionial gravity analysis highly depends on the transformation of data (usually log) and manipulating or even dismissing zero trade. 
+In tradionial gravity analysis often the data is (usually log) tranformed, Zeros in trade are manipulated or even dismissed. 
 
-Decision trees do not need transformation of data because they max. entropy / min. variance in a regression problem. Let's try out how they work on this problem!
+Decision trees do not need transformation of data because they max. entropy / min. variance in a regression problem. Let's try out how they perform on this problem!
 
-Decision trees variations are applied to a very simple, traditional gravity analysis. 
+Decision trees variations are applied to a very simple, traditional gravity analysis with only 6 explanatory variables for the bilateral trade flow: GDP of exporter and importer, the distance between them, common border, offical language and colonial history.
 
 The following scikit-learn ensemble methods are applied:
 * RandomForestRegressor
 * GradientBoostingRegressor
 * AdaBoostRegressor
 
-In order to tune and improve results, train-testsplit, grid search, crossvalidation and other scikit-learn methods help a lot too, of course.
+In order to observe, tune and improve results, train-testsplit, grid search, cross-validation and other methods help a lot too.
 
-Spoiler alert: robustness is a problem. I blame this mainly on the lack of explanatory power of the theshold itself.
+Spoiler alert: robustness is a problem. I blame this mainly on the lack of explanatory power for the threshold.
 
 # Results
 
 Randomness is in various places - intentionally so!  
-Therefore results will vary from running the code, but overall results from cross-validated results should not vary much.
+Therefore results will vary from running the code repeatedly, but mean results from cross-validation will not vary much.
 
-Only one tweak:  
-Zero trade is about 25% in the data. In order to smoothe results, statified fold in cross validation ensures that this share is equal in both test and train data.
+One tweak:  Zero trade is about 25% in the data. In order to improve results, statification in train-test-split ensures that this share is equal in both test and train data.
 
 mean cross validated Test-R2 from 
 * RandomForestRegressor(n_estimators=200, max_depth=52): 63% 
 * RandomForestRegressor(n_estimators=377, max_depth=13); 62%
 * GradientBoostingRegressor(loss = 'huber', max_depth = 8, n_estimators = 200): 69%
-* GradientBoostingRegressor(loss = 'huber', max_depth = 8, n_estimators = 200): 68%
+* GradientBoostingRegressor(loss = 'ls', max_depth = 3, n_estimators = 200): 68%
+* GradientBoostingRegressor(subsample = 0.8, max_depth=5, n_estimators = 200): 64%
 * AdaBoostRegressor(base_estimator = DecisionTreeRegressor(criterion = 'friedman_mse', max_depth=34)): 69%
 
-To put this in perspective:  
-* Test-R2 are from out-of sample. Training R2 usually overfits with an R2 over 90%.
-* There is no transformation of the data (apart from removed missing observations).
-* The Zero-trade observations are quite numerous (25%), with no obvious explanatory variable explaining the theshold included. Nevertheless, mean predictive power is comparable to explanatory power of traditional regression analysis.
+Evaluation of results:
+* Test-R2 are from out-of sample. Training-R2 is usually over 90% (indicating overfitting).
+* No transformation of the data (apart from removed missing observations) is necessary.
+* This analysis did not include a variable with substantial explanatory power for the Zeros / the theshold in the output. Test-R2 fluctuates quite stronly, indicating a possible lack of robustness. Nevertheless, mean predictive power is comparable to explanatory power of similar traditional regression analysis.
 
-
+Exemplary test vs predicted trade flow scatter plot from above ensemble methods:
+![Figure_y_y](https://user-images.githubusercontent.com/82636544/116657384-99758c80-a98e-11eb-969a-8e6d7ce862dd.png) ![Figure_y_y_loglog](https://user-images.githubusercontent.com/82636544/116657399-9d091380-a98e-11eb-99b3-a65ddee0f53a.png)
 
 
