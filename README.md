@@ -3,7 +3,7 @@
 draft - comments welcome!
 
 ## background
-The aim of this excercise: apply decision trees (boosting and ensembles) on a nonlinear regression problem with a threshold in the output variable. 
+The aim of this exercise: apply decision trees (boosting and ensembles) on a nonlinear regression problem with a threshold in the output variable. 
 
 Specifically: predict bilateral trade between countries with GDP of exporting and importing country, their distance and some binary variables, such as common official language. 
 The distribution of the data, theory and numerous empirical studies show that the relation is non-linear, following the law of gravity. 
@@ -12,15 +12,15 @@ The distribution of the data, theory and numerous empirical studies show that th
 
 There is loads of literature on this, for a practitioner oriented overview I highly recommend: Yotov, Yoto; Piermartini, Roberta; Monteiro, José-Antonio; Larch, Mario (2016): An Advanced Guide to Trade Policy Analysis: The Structural Gravity Model. UNCTAD/WTO.
 
-However, there are various problems occuring when applying this equation to data. Above all, the ML-variables cannot be observed. Another point is that trade flow is plagued with Zeros. Intuitively and simplified, they occur as a theshold to be overcome in order to trade at all, because of international trade costs.
+However, there are various problems occurring when applying this equation to data. Above all, the ML-variables cannot be observed. Another point is that trade flow is plagued with Zeros. Intuitively and simplified, they occur as a threshold to be overcome in order to trade at all, because of international trade costs.
 
 There are quite a few solutions to tackle these problems in econometric analysis - see the source cited above!
 
-Here, I offer another possible approach for this topic based on decicion trees.
+Here, I offer another possible approach for this topic based on decision trees.
 
 ## summary, spoiler alert and why decision trees??
 
-In tradionial gravity analysis often the data is (usually log) tranformed, Zeros in trade are manipulated or even dismissed. 
+In traditional gravity analysis often the data is (usually log) transformed, Zeros in trade are manipulated or even dismissed. 
 
 Decision trees do not need transformation of data because they max. entropy / min. variance in a regression problem. Let's try out how they perform on this problem!
 
@@ -31,7 +31,7 @@ The following scikit-learn ensemble methods are applied:
 * GradientBoostingRegressor
 * AdaBoostRegressor
 
-In order to observe, tune and improve results, train-testsplit, grid search, cross-validation and other methods help a lot too.
+In order to observe, tune and improve results, train-test-split, grid search, cross-validation and other methods help a lot too.
 
 Spoiler alert: robustness is a problem. I blame this mainly on the lack of explanatory power for the threshold.
 
@@ -40,7 +40,7 @@ Spoiler alert: robustness is a problem. I blame this mainly on the lack of expla
 Randomness is in various places - intentionally so!  
 Therefore results will vary from running the code repeatedly, but mean results from cross-validation will not vary much.
 
-One tweak:  Zero trade is about 25% in the data. In order to improve results, statification in train-test-split ensures that this share is equal in both test and train data.
+One tweak:  Zero trade is about 25% in the data. In order to improve results, stratification in train-test-split ensures that this share is equal in both test and train data.
 
 mean cross validated Test-R2 from 
 * RandomForestRegressor(n_estimators=200, max_depth=52): 63% 
@@ -53,7 +53,7 @@ mean cross validated Test-R2 from
 Evaluation of results:
 * Test-R2 are from out-of sample. Training-R2 is usually over 90% (indicating overfitting).
 * No transformation of the data (apart from removed missing observations) is necessary.
-* This analysis did not include a variable with substantial explanatory power for the Zeros / the theshold in the output. Test-R2 fluctuates quite stronly, indicating a possible lack of robustness. Nevertheless, mean predictive power is comparable to explanatory power of similar traditional regression analysis.
+* This analysis did not include a variable with substantial explanatory power for the Zeros / the threshold in the output. Test-R2 fluctuates quite strongly, indicating a possible lack of robustness. Nevertheless, mean predictive power is comparable to explanatory power of similar traditional regression analysis.
 
 Exemplary test vs predicted trade flow scatter plots from above ensemble methods:
 
