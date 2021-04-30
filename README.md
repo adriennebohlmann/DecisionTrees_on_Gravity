@@ -1,5 +1,7 @@
 # DecisionTrees_on_Gravity
 
+draft - comments welcome!
+
 ## background
 The aim of this excercise: apply decision trees (boosting and ensembles) on a nonlinear regression problem with a threshold in the output variable. 
 
