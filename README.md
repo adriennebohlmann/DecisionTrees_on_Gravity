@@ -54,6 +54,8 @@ Evaluation of results:
 * This analysis did not include a variable with substantial explanatory power for the Zeros / the theshold in the output. Test-R2 fluctuates quite stronly, indicating a possible lack of robustness. Nevertheless, mean predictive power is comparable to explanatory power of similar traditional regression analysis.
 
 Exemplary test vs predicted trade flow scatter plot from above ensemble methods:
+
+
 ![Figure_y_y](https://user-images.githubusercontent.com/82636544/116657384-99758c80-a98e-11eb-969a-8e6d7ce862dd.png) ![Figure_y_y_loglog](https://user-images.githubusercontent.com/82636544/116657399-9d091380-a98e-11eb-99b3-a65ddee0f53a.png)
 
 
