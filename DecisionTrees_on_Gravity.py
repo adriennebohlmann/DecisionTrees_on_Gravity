@@ -131,7 +131,7 @@ class prepare_data:
         
     # train test split and transform
     def tts(self, rnd = 42):
-        # train test split keeping only n_X explanatory variables
+        # train test split stratify on binary zero trade
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X[:,0:6], self.y
                                                                                 , random_state=(rnd)
                                                                                 , stratify=(self.X[:,6])
