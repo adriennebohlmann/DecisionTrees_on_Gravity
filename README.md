@@ -31,14 +31,14 @@ The following scikit-learn ensemble methods are applied:
 * GradientBoostingRegressor
 * AdaBoostRegressor
 
-In order to observe, tune and improve results, train-test-split, grid search, cross-validation and other methods help a lot too.
+In order to observe, tune and improve results and check robustness, further methods are applied, such as train-test-split.
 
 Spoiler alert: robustness is a problem. I blame this mainly on the lack of explanatory power for the threshold.
 
 # Results
 
 Randomness is in various places - intentionally so!  
-Therefore results will vary from running the code repeatedly, but mean results from cross-validation will not vary much.
+Therefore results will vary from running the code repeatedly, but mean results from random repetition will not vary much.
 
 One tweak:  Zero trade is about 25% in the data. In order to improve results, stratification in train-test-split ensures that this share is equal in both test and train data.
 
