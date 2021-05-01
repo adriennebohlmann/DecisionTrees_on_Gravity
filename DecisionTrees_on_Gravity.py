@@ -3,20 +3,16 @@
 """
 gravity random forest, ensembles
 OOP
-
 python 3.7.7
 numpy 1.19.2
 scikit-learn 0.24.1
 tensorflow 2.0.0    
 keras 2.3.1
 matplitlib 3.3.2
-
 @author: adrienne bohlmann
-
 """
 import pandas as pd
 import numpy as np
-
 
 from sklearn.model_selection import train_test_split, RandomizedSearchCV, GridSearchCV
 
@@ -140,16 +136,8 @@ class prepare_data:
                                                                                 , random_state=(rnd)
                                                                                 , stratify=(self.X[:,6])
                                                                                 )
-   
-    def plot_hist(self):
-        # unscaled data
-        plt.hist(self.X_train[:, 0], alpha=0.6, bins=100, color='brown')
-        plt.hist(self.X_train[:, 1], alpha=0.6, bins=100, color='orange')
-        plt.title('selected unscaled training data')
-        plt.legend(['weighted distance', 'GDP'])
-        plt.show()
-        
 
+# plot feature importance 
 def plot_feature_importance(model):
     n_features = len(data.X_train[0,:])
     plt.barh(range(n_features), model.feature_importances_, align='center') 
@@ -157,9 +145,10 @@ def plot_feature_importance(model):
     plt.xlabel("Feature importance")
     plt.ylabel("Feature")
 
-def cross_val(estimator, cv=21):
+# random repetition loop instead of cross validation
+def rnd_val(estimator, cv=21):
     all_r2_test = []
-    for i in range(cv+1):
+    for i in range(cv):
         data.tts(rnd=None)
         estimator.fit(data.X_train, data.y_train)
         r2_test = estimator.score(data.X_test, data.y_test)
@@ -168,12 +157,12 @@ def cross_val(estimator, cv=21):
         print('R2 train', estimator.score(data.X_train, data.y_train))
     print('mean R2 test:', np.mean(all_r2_test))
 
-
+# get R2 for test and train data
 def get_R2s(estimator):
     print('test R2:', estimator.score(data.X_test, data.y_test))
     print('train R2:', estimator.score(data.X_train, data.y_train))
     
-
+# plot prediction against trie values
 def plt_y_pred(estimator):
     y_pred = estimator.predict(data.X_test)
     # plot feature importance
@@ -197,14 +186,7 @@ def plt_y_pred(estimator):
 # prepare data
 
 data = prepare_data()
-
-# reproducible data split
-# data.tts(rnd = 42)
-# random data split
-data.tts(rnd = None)
-
-# have a look
-data.plot_hist()
+data.tts()
 
 # retrieve feature names
 feature_names = gravdata.columns[1:len(X[0,:])]
@@ -227,7 +209,7 @@ with open('tree.dot') as f:
     dot_graph = f.read()
 graphviz.Source(dot_graph)
 
-cross_val(tree)
+rnd_val(tree)
 
 
 ##############################################################################
@@ -261,10 +243,8 @@ for i in range(21):
     tree_grid_search.fit(data.X_train, data.y_train)
     print(tree_grid_search.best_params_)
     
-# frequent results
+# most frequent result
 # 'friedman_mse'
-
-
 
 ##############################################################################
 # forest
@@ -273,6 +253,7 @@ forest = RandomForestRegressor(random_state=42)
 forest.fit(data.X_train, data.y_train)
 
 get_R2s(forest)
+
 plt_y_pred(forest)
 
 ##############################################################################
@@ -321,17 +302,17 @@ forest_opt.fit(data.X_train, data.y_train)
 get_R2s(forest_opt)
 plt_y_pred(forest_opt)
 
-cross_val(forest_opt)
+rnd_val(forest_opt)
 
 
 ##############################################################################
-# cross validation
+# validation / robustrness check
 # two sources of randomness: in train test split and the forest
 
 # first, test only random train test split, holding the forest fixed
 forest_opt2 = RandomForestRegressor(n_estimators=377, max_depth=13)
 
-cross_val(forest_opt2)
+rnd_val(forest_opt2)
 
 ##############################################################################
 # gradient boosting
@@ -339,7 +320,7 @@ cross_val(forest_opt2)
 
 booster = GradientBoostingRegressor()
 
-cross_val(booster)
+rnd_val(booster)
     
 ##############################################################################
 # grid search for boosting
@@ -399,7 +380,7 @@ booster_opt = GradientBoostingRegressor(learning_rate=0.1
                                         )
 
 # cross validating with random tts
-cross_val(booster_opt)
+rnd_val(booster_opt)
 
 # stochastic gradient descent  boosting
 booster_SGD = GradientBoostingRegressor(subsample = 0.8
@@ -407,9 +388,9 @@ booster_SGD = GradientBoostingRegressor(subsample = 0.8
                                         , n_estimators = 200
                                         )
         
-cross_val(booster_SGD)        
+rnd_val(booster_SGD)        
 
-# have a look?
+# have a look
 get_R2s(booster_SGD)
 plt_y_pred(booster_SGD)
 
@@ -428,25 +409,5 @@ get_R2s(ada)
 
 plt_y_pred(ada)
 
-cross_val(ada)
+rnd_val(ada)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
-    
-    
