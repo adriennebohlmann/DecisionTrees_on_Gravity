@@ -42,14 +42,6 @@ Therefore results will vary from running the code repeatedly, but mean results f
 
 One tweak:  Zero trade is about 25% in the data. In order to improve results, stratification in train-test-split ensures that this share is equal in both test and train data.
 
-mean cross validated Test-R2 from 
-* RandomForestRegressor(n_estimators=200, max_depth=52): 63% 
-* RandomForestRegressor(n_estimators=377, max_depth=13); 62%
-* GradientBoostingRegressor(loss = 'huber', max_depth = 8, n_estimators = 200): 69%
-* GradientBoostingRegressor(loss = 'ls', max_depth = 3, n_estimators = 200): 68%
-* GradientBoostingRegressor(subsample = 0.8, max_depth=5, n_estimators = 200): 64%
-* AdaBoostRegressor(base_estimator = DecisionTreeRegressor(criterion = 'friedman_mse', max_depth=34)): 60%
-
 Evaluation of results:
 * Test-R2 are from out-of sample. Training-R2 is usually over 90% (indicating overfitting).
 * No transformation of the data (apart from removed missing observations) is necessary.
