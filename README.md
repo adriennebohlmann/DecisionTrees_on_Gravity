@@ -29,6 +29,7 @@ Decision trees variations are applied to a very simple, traditional gravity anal
 The following scikit-learn ensemble methods are applied:
 * RandomForestRegressor
 * GradientBoostingRegressor
+* Stochastic Gradient Boosting
 * AdaBoostRegressor
 
 In order to observe, tune and improve results and check robustness, further methods are applied, such as train-test-split.
@@ -46,6 +47,9 @@ Evaluation of results:
 * Test-R2 are from out-of sample. Training-R2 is usually over 90% (indicating overfitting).
 * No transformation of the data (apart from removed missing observations) is necessary.
 * This analysis did not include a variable with substantial explanatory power for the Zeros / the threshold in the output. Test-R2 fluctuates quite strongly, indicating a possible lack of robustness. Nevertheless, mean predictive power is comparable to explanatory power of similar traditional regression analysis.
+
+Comarison to PPML (considered best practice to date): 
+Even though robustness is an issue, sbove methods based on decision trees consistently deliver better out-of-sample predictive performance (test R2) than PPML.
 
 Exemplary test vs predicted trade flow scatter plots from above ensemble methods:
 
