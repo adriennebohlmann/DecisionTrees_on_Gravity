@@ -2,6 +2,8 @@
 
 draft - comments welcome!
 
+Presentation of key results in the presentation (gravDT.pdf).
+
 ## background
 The aim of this exercise: apply decision trees (boosting and ensembles) on a nonlinear regression problem with a threshold in the output variable. 
 
