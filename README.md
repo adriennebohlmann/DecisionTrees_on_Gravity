@@ -24,7 +24,7 @@ In traditional gravity analysis often the data is (usually log) transformed, Zer
 
 Decision trees do not need transformation of data because they max. entropy / min. variance in a regression problem. Let's try out how they perform on this problem!
 
-Decision trees variations are applied to a very simple, traditional gravity analysis with only 6 explanatory variables for the bilateral trade flow: GDP of exporter and importer, the distance between them, common border, offical language and colonial history.
+Decision trees variations are applied to a very simple, traditional gravity analysis with typical explanatory variables for the bilateral trade flow: GDP of exporter and importer, the distance between them, common border, offical language, colonial history, island and landlocked status of a country.
 
 The following scikit-learn ensemble methods are applied:
 * RandomForestRegressor
@@ -32,20 +32,20 @@ The following scikit-learn ensemble methods are applied:
 * Stochastic Gradient Boosting
 * AdaBoostRegressor
 
-In order to observe, tune and improve results and check robustness, further methods are applied, such as train-test-split.
+In order to observe, tune and improve results and check robustness, further methods are applied, such as train-test-split, grid search.
 
 Spoiler alert: robustness is a problem. I blame this mainly on the lack of explanatory power for the threshold.
 
 # Results
 
 Randomness is in various places - intentionally so!  
-Therefore results will vary from running the code repeatedly, but mean results from random repetition will not vary much.
+Therefore results will vary from running the code repeatedly, but mean results from random repetition are reasonably robust.
 
-One tweak:  Zero trade is about 25% in the data. In order to improve results, stratification in train-test-split ensures that this share is equal in both test and train data.
+One tweak:  Zero trade is about 25% in this cross section data. In order to improve results, stratification with a discrete approximation in train-test-split ensures that this share is approx. equal in both test and train data.
 
 Evaluation of results:
-* Test-R2 are from out-of sample. Training-R2 is usually over 90% (indicating overfitting).
-* No transformation of the data (apart from removed missing observations) is necessary.
+* Test-R2 are from out-of sample. Training-R2 is usually over 90% (indicating tree-typical overfitting).
+* No transformation of the data (apart from removed missing observations) is necessary - compared to other estimators
 * This analysis did not include a variable with substantial explanatory power for the Zeros / the threshold in the output. Test-R2 fluctuates quite strongly, indicating a possible lack of robustness. Nevertheless, mean predictive power is comparable to explanatory power of similar traditional regression analysis.
 
 Comarison to PPML (considered best practice to date):  
