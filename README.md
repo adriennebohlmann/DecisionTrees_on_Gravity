@@ -5,7 +5,7 @@ draft - comments welcome!
 Presentation of key results in the presentation (gravDT.pdf).
 
 ## background
-The aim of this exercise: apply decision trees (boosting and ensembles) on a nonlinear regression problem with a threshold in the output variable. 
+The aim of this exercise: apply decision trees (ensembles) on a nonlinear regression problem with a threshold in the output variable. 
 
 Specifically: predict bilateral trade between countries with GDP of exporting and importing country, their distance and some binary variables, such as common official language. 
 The distribution of the data, theory and numerous empirical studies show that the relation is non-linear, following the law of gravity. 
